@@ -1,0 +1,1260 @@
+/* estilos gerais da página */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 600px;
+  border-left: 10px double black;
+  border-right: 10px double black;
+  padding: 0 2em;
+  background-image: linear-gradient(to bottom right, #f99d9d, #a3f99d, #9db1f9);
+  color: #333;
+  font-family: impact;
+}
+
+h1 {
+  margin-top: 0;
+  font-family: "verdana";
+  font-weight: normal;
+  color: black;
+}
+
+h1::after {
+  content: " ";
+  display: block;
+  width: 100%;
+  background-image: linear-gradient(to right, #e6f109, transparent);
+  height: 2px;
+}
+
+h2 {
+  clear: both;
+  color: black;
+  font-family: "Comic Sans", cursive;
+  background-image: linear-gradient(to right, red 1%, rgba(255,255,255,.5) 1%, transparent);
+  padding: 0.15em 0.15em 0.15em 1em;
+}
+
+.circular {
+  border-radius: 50%;
+  shape-outside: circle(50%);
+}
+
+.foto-ovelha {
+  display: inline-block;
+  width: 125px;
+  border: 2px solid orange;
+  box-shadow: 3px 3px 3px red;
+}
+
+.foto-ovelha:nth-of-type(odd) {
+  float: left;
+  margin-right: 1.5em;
+}
+
+.foto-ovelha:nth-of-type(even) {
+  float: right;
+  margin-left: 1.5em;
+}
+
+p {
+  text-align: justify;
+  line-height: 1.5em;
+}
+
+ul {
+  list-style-image: url(imagens/ovelhinha.gif);
+}
+
+/* Estilos da tela vibrando - quando a ovelhinha cai ou o dispositivo
+  é chacoalhado */
+.vibrando > *:not(p):not(.ovelhita) {
+  animation: vibrando 1s ease-out 1;
+  overflow: hidden;
+}
+
+.vibrando > img {
+  animation-delay: .1s;
+}
+
+.vibrando > p {
+  animation: rodando 1s ease-out 1;
+  animation-delay: .05s;
+}
+
+@keyframes vibrando {
+  20% { transform: translateX(3vh); }
+  40% { transform: translateX(-3vh); }
+  60% { transform: translateX(1vh); }
+  80% { transform: translateX(-1vh); }
+  100% { transform: translateX(0.5vh); }
+}
+
+@keyframes rodando {
+  20% { transform: rotateZ(2deg); }
+  40% { transform: rotateZ(-2deg); }
+  60% { transform: rotateZ(1deg); }
+  80% { transform: rotateZ(-1deg); }
+  100% { transform: rotateZ(.02deg); }
+}
+
+
+/* Estilos da ovelhita */
+
+.sprite {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  cursor: move;
+  transition: transform 150ms cubic-bezier(0.52, 1.82, 1, 1.83), opacity 150ms ease-out;
+  transform: scale3d(0.5, 0.5, 0.5);
+  opacity: .5;
+}
+
+.surgiu {
+  transform: scale3d(1, 1, 1);
+  opacity: 1;
+}
+
+
+.sprite.invertido {
+  transform: rotateY(.5turn);
+}
+
+.sprite > img {
+  position: absolute;
+  top: calc(-1*40px);
+  left: calc(-3*40px);
+}
+
+.sprite.parado > img {
+  top: calc(-1*40px);
+  left: calc(-3*40px);
+  animation: parado 1.5s steps(1) 1;
+}
+
+@keyframes parado {
+  100% { left: calc(-3*40px); }
+}
+
+.sprite.andando > img {
+  top: calc(-1*40px);
+  left: calc(-2*40px);
+  animation: andando .5s steps(2) infinite;
+}
+
+@keyframes andando {
+  100% { left: calc(-4*40px); }
+}
+
+.sprite.correndo > img {
+  top: calc(-1*40px);
+  left: calc(-4*40px);
+  animation: correndo .35s steps(2) infinite;
+}
+
+@keyframes correndo {
+  100% { left: calc(-6*40px); }
+}
+
+.sprite.rolando {
+  transform: rotateY(.5turn);
+}
+
+.sprite.rolando.invertido {
+  transform: initial;
+}
+
+.sprite.rolando > img {
+  top: calc(-8*40px);
+  left: calc(0*40px);
+  animation: rolando 1s steps(8) infinite;
+}
+
+@keyframes rolando {
+  100% {
+    left: calc(-8*40px);
+  }
+}
+
+.sprite.virando > img {
+  top: calc(-1*40px);
+  left: calc(-9*40px);
+  animation: virando .5s steps(2) 1 forwards;
+}
+
+@keyframes virando {
+  100% { left: calc(-11*40px); }
+}
+
+.sprite.adormecendo,
+.sprite.dormindo {
+  cursor: pointer;
+}
+
+.sprite.adormecendo > img {
+  top: calc(-1*40px);
+  left: calc(-6*40px);
+  animation: adormecendo 1s steps(2) 1 forwards;
+}
+
+@keyframes adormecendo {
+  100% { left: calc(-8*40px); }
+}
+
+.sprite.dormindo > img {
+  top: calc(-1*40px);
+  left: 0;
+  animation: dormindo 1s steps(2) infinite;
+}
+
+@keyframes dormindo {
+  100% { left: calc(-2*40px); }
+}
+
+.sprite.pendurada {
+  cursor: none;
+}
+
+.sprite.pendurada > img {
+  top: calc(-3*40px);
+  left: calc(-11*40px);
+  animation: pendurada .5s steps(2) infinite;
+}
+
+@keyframes pendurada {
+  100% { left: calc(-13*40px); }
+}
+
+.sprite.despencando > img {
+  top: calc(-3*40px);
+  left: calc(-14*40px);
+  animation: despencando .25s steps(2) infinite;
+}
+
+@keyframes despencando {
+  100% { left: calc(-16*40px); }
+}
+
+.sprite.despencado > img {
+  top: calc(-4*40px);
+  left: calc(0*40px);
+  animation: despencado 2s steps(2) infinite;
+}
+
+@keyframes despencado {
+  100% { left: calc(0*40px); }
+}
+
+
+/* Estilos dos comandos de voz */
+
+.balao-comando {
+  position: fixed;
+  right: 1em;
+  bottom: 5em;
+  max-width: 50%;
+  font-size: 75%;
+  background-color: rgba(255,255,255,.7);
+  color: rgba(0,0,0,.8);
+  padding: 0.5em;
+  border: 1px solid currentColor;
+  border-radius: 1em 1em 0 1em;
+  line-height: 1em;
+  animation: surgindo-de-baixo 3s ease-in-out 0s 1 forwards;
+}
+
+.balao-comando .desconhecido {
+  color: rgba(255,0,0,.8);
+  text-decoration: line-through;
+}
+
+@keyframes surgindo-de-baixo {
+  from {
+    transform: translateY(25%);
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(0);
+  }
+  90% {
+    transform: translateY(-25%);
+  }
+  to {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}
+
+
+/* Estilos do botão de microfone (https://gist.github.com/apdarshan/7c42c97723ab02792bf9) */
+
+.google-microphone,
+.google-microphone:active {
+  font-size: 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position: fixed;
+  right: 0.25em;
+  bottom: 50%;
+  margin: 0 0 -34px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+  z-index: 100;
+}
+
+.google-microphone:active .gn {
+  left: 2px;
+  top: 2px;
+}
+
+.google-microphone:focus {
+  outline: none;
+}
+
+.google-microphone:focus .gn {
+  box-shadow: 0 0 0 2px white;
+}
+
+.shadow {
+  position:relative;
+  margin: 5% auto;
+  border-radius:50%;
+  width:3.5em; height:3.5em;
+  background: white;
+  top:20%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  transform: scale3d(.75, .75, .75);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+}
+
+@keyframes move_eye {
+  from {
+    transform: scale3d(.75, .75, .75);
+  } to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.listening {
+  animation: move_eye 0.4s cubic-bezier(0.25,0.1,0.25,1) 0s infinite alternate;
+}
+
+.gn {
+  position:relative;
+  margin: 5% auto;
+  background-color: #1565c0;
+  border-radius:50%;
+  width:3.5em; height:3.5em;
+  transition: box-shadow 150ms ease-out;
+}
+
+.gn:hover {
+  box-shadow: .3em .3em .3em rgba(90,90,90,.3);
+}
+
+.mc:before, .mc:after,
+.gn:before, .gn:after {
+  content:'';
+  position:absolute;
+  background-color:#fff;
+}
+
+.gn:after {
+  top:30%; left:43%;
+  height:15%; width:14%;
+  border-top-left-radius:50%;
+  border-top-right-radius:50%;
+}
+
+.gn:before {
+  top:40%; left:43%;
+  height:15%; width:14%;
+  border-bottom-left-radius:50%;
+  border-bottom-right-radius:50%;
+}
+
+.mc {
+  position:absolute;
+  top:50%; left:37%;
+  height:24%;
+  width:26.5%;
+  overflow:hidden;
+}
+
+.mc:before {
+  bottom:50%;
+  width:100%; height:100%;
+  left: 0;
+  box-sizing:border-box;
+  border-radius:50%;
+  border:0.1em solid #fff;
+  background:none;
+}
+
+.mc:after {
+  top:50%; left:40%;
+  width:20%; height:25%;
+}
+
+
+/* Estilos das instruções próximas ao microfone */
+
+#instrucoes {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.instrucao {
+  position: fixed;
+  right: 2.25em;
+  bottom: 50%;
+  margin-bottom: -0.75em;
+  display: inline-block;
+  opacity: 0;
+  z-index: 1;
+  color: #1565c0;
+  background-color: rgba(255,255,255,.7);
+  border-radius: 0.25em;
+  padding: .25em;
+  transform-origin: right;
+  transition: all 250ms ease-out;
+}
+
+.instrucao:nth-child(1) { transform: rotate(75deg); }
+.instrucao:nth-child(2) { transform: rotate(45deg); }
+.instrucao:nth-child(3) { transform: rotate(15deg); }
+.instrucao:nth-child(4) { transform: rotate(-15deg); }
+.instrucao:nth-child(5) { transform: rotate(-45deg); }
+.instrucao:nth-child(6) { transform: rotate(-75deg); }
+
+.ativa .instrucao {
+  opacity: 1;
+}
+
+.ativa .instrucao:nth-child(1) {
+  transform: rotate(75deg) translateX(-3em);
+  transition-delay: 0ms;
+}
+
+.ativa .instrucao:nth-child(2) {
+  transform: rotate(45deg) translateX(-3em);
+  transition-delay: 40ms;
+}
+
+.ativa .instrucao:nth-child(3) {
+  transform: rotate(15deg) translateX(-3em);
+  transition-delay: 80ms;
+}
+
+.ativa .instrucao:nth-child(4) {
+  transform: rotate(-15deg) translateX(-3em);
+  transition-delay: 120ms;
+}
+
+.ativa .instrucao:nth-child(5) {
+  transform: rotate(-45deg) translateX(-3em);
+  transition-delay: 160ms;
+}
+
+.ativa .instrucao:nth-child(6) {
+  transform: rotate(-75deg) translateX(-3em);
+  transition-delay: 200ms;
+}
+
+/*
+ * Author: Alex Gibson
+ * https://github.com/alexgibson/shake.js
+ * License: MIT license
+ */
+
+(function(global, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(function() {
+            return factory(global, global.document);
+        });
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = factory(global, global.document);
+    } else {
+        global.Shake = factory(global, global.document);
+    }
+} (typeof window !== 'undefined' ? window : this, function (window, document) {
+
+    'use strict';
+
+    function Shake(options) {
+        //feature detect
+        this.hasDeviceMotion = 'ondevicemotion' in window;
+
+        this.options = {
+            threshold: 15, //default velocity threshold for shake to register
+            timeout: 1000 //default interval between events
+        };
+
+        if (typeof options === 'object') {
+            for (var i in options) {
+                if (options.hasOwnProperty(i)) {
+                    this.options[i] = options[i];
+                }
+            }
+        }
+
+        //use date to prevent multiple shakes firing
+        this.lastTime = new Date();
+
+        //accelerometer values
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+
+        //create custom event
+        if (typeof document.CustomEvent === 'function') {
+            this.event = new document.CustomEvent('shake', {
+                bubbles: true,
+                cancelable: true
+            });
+        } else if (typeof document.createEvent === 'function') {
+            this.event = document.createEvent('Event');
+            this.event.initEvent('shake', true, true);
+        } else {
+            return false;
+        }
+    }
+
+    //reset timer values
+    Shake.prototype.reset = function () {
+        this.lastTime = new Date();
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+    };
+
+    //start listening for devicemotion
+    Shake.prototype.start = function () {
+        this.reset();
+        if (this.hasDeviceMotion) {
+            window.addEventListener('devicemotion', this, false);
+        }
+    };
+
+    //stop listening for devicemotion
+    Shake.prototype.stop = function () {
+        if (this.hasDeviceMotion) {
+            window.removeEventListener('devicemotion', this, false);
+        }
+        this.reset();
+    };
+
+    //calculates if shake did occur
+    Shake.prototype.devicemotion = function (e) {
+        var current = e.accelerationIncludingGravity;
+        var currentTime;
+        var timeDifference;
+        var deltaX = 0;
+        var deltaY = 0;
+        var deltaZ = 0;
+
+        if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+            return;
+        }
+
+        deltaX = Math.abs(this.lastX - current.x);
+        deltaY = Math.abs(this.lastY - current.y);
+        deltaZ = Math.abs(this.lastZ - current.z);
+
+        if (((deltaX > this.options.threshold) && (deltaY > this.options.threshold)) || ((deltaX > this.options.threshold) && (deltaZ > this.options.threshold)) || ((deltaY > this.options.threshold) && (deltaZ > this.options.threshold))) {
+            //calculate time in milliseconds since last shake registered
+            currentTime = new Date();
+            timeDifference = currentTime.getTime() - this.lastTime.getTime();
+
+            if (timeDifference > this.options.timeout) {
+                window.dispatchEvent(this.event);
+                this.lastTime = new Date();
+            }
+        }
+
+        this.lastX = current.x;
+        this.lastY = current.y;
+        this.lastZ = current.z;
+
+    };
+
+    //event handler
+    Shake.prototype.handleEvent = function (e) {
+        if (typeof (this[e.type]) === 'function') {
+            return this[e.type](e);
+        }
+    };
+
+    return Shake;
+}));
+
+const ANIMACOES = ['parado', 'andando', 'correndo', 'rolando', 'virando', 
+  'adormecendo', 'dormindo', 'despencando', 'despencado', 'pendurada'];
+
+const ESTADOS = {
+  reflexiva: { loop: 'parado', proximo: ['dormindo', 'andando', 'reflexiva'] },
+  dormindo: { loop: 'dormindo', pre: 'adormecendo', pos: { anim: 'parado', duracao: 500 }, proximo: ['andando', 'reflexiva'] },
+  andando: { loop: 'andando', proximo: ['andando', 'reflexiva', 'virando', 'correndo'] },
+  correndo: { loop: 'correndo', proximo: ['andando', 'correndo'] },
+  virando: { loop: 'virando', proximo: ['reflexiva', 'andando'] },
+  rolando: { loop: 'rolando', proximo: ['reflexiva', 'dormindo'] },
+  pendurada: { loop: 'pendurada', proximo: ['despencando'] },
+  despencando: { loop: 'despencando', pos: { anim: 'despencado', duracao: 2000 }, proximo: ['reflexiva']}
+};
+
+const EFEITOS_SONOROS = [
+  'comeca-escutar',
+  'conseguiu-escutar',
+  'cancelou-escuta'].reduce((prev, cur) => {
+    prev[cur] = new Audio(`audio/${cur}.mp3`);
+    return prev;
+  }, {});
+  
+const COMANDOS_DE_VOZ = {
+  parar: ['para', 'parar', 'parado', 'parada'],
+  continuar: ['continua', 'continuar', 'continue'],
+  ovelhita: ['ovelha', 'ovelhinha', 'ovelhita'],
+  rolar: ['rola', 'rolar'],
+  voltar: ['volta', 'voltar'],
+  limpar: ['limpa', 'limpar']
+};
+
+const GRAMATICA = `#JSGF V1.0; grammar comando; public <comando> = ${Object.values(COMANDOS_DE_VOZ).reduce((prev, cur) => prev.concat(cur, [])).join(' | ')} ;`;
+
+const inicializaReconhecimentoDeFala = (callback, microfoneEl) => {
+  let prefix = ['', 'webkit', 'moz'];
+  for (let p of prefix) {
+    if (`${p}SpeechRecognition` in window) {
+      prefix = p;
+      break;
+    }
+  }
+    
+  if (!Array.isArray(prefix)) {
+    let reconhecimento = new window[`${prefix}SpeechRecognition`]();
+    let palavrasParaReconhecimento = new window[`${prefix}SpeechGrammarList`]();
+    palavrasParaReconhecimento.addFromString(GRAMATICA, 1);
+    reconhecimento.grammars = palavrasParaReconhecimento;
+    reconhecimento.lang = 'pt-BR';
+    reconhecimento.continuous = false;
+    reconhecimento.interimResults = false;
+    reconhecimento.maxAlternatives = 1;
+    reconhecimento.start();
+    reconhecimento.onresult = (e) => {
+      let ultima = e.results.length - 1;
+      let comandos = e.results[ultima][0].transcript.trim().toLowerCase().split(' ');
+
+      // cria um balão de texto mostrando o que foi falado/reconhecido ou não
+      let balaoComando = document.createElement('output');
+      balaoComando.classList.add('balao-comando');
+      balaoComando.addEventListener('animationend', (e) => {
+        document.body.removeChild(balaoComando)
+      });
+      let conteudoBalaoComado = [];
+      
+      // para cada palavra falada nesta frase...
+      for (let comando of comandos) {
+        let acaoDesteComando = null;
+        
+        for (let c of Object.keys(COMANDOS_DE_VOZ)) {
+          
+          if (COMANDOS_DE_VOZ[c].indexOf(comando) !== -1) {
+            acaoDesteComando = callback[c];
+            // esta palavra foi reconhecida como um comando válido
+            conteudoBalaoComado.push(comando);
+            break;
+          } else {
+            conteudoBalaoComado
+          }
+        }
+        
+        if (acaoDesteComando !== null) {
+          // esta palavra (comando) foi reconhecida
+          acaoDesteComando();
+        } else {
+          // esta palavra (comando) não foi reconhecida
+          conteudoBalaoComado.push(`<span class="desconhecido">${comando}</span>`);
+        }
+      }
+      
+      // define o conteúdo do balão com os comandos
+      balaoComando.innerHTML = conteudoBalaoComado.join(' ');
+      document.body.appendChild(balaoComando);
+    
+      // som de sucesso      
+      EFEITOS_SONOROS['conseguiu-escutar'].play();
+    };
+    
+    reconhecimento.onend = () => {
+      // pára a animação de escuta do microfone
+      microfoneEl.classList.remove('listening');
+      document.body.querySelector('#instrucoes').classList.remove('ativa');
+    };
+
+    reconhecimento.onerror = (e) => {
+      reconhecimento.onend();
+      EFEITOS_SONOROS['cancelou-escuta'].play();
+    };
+
+    reconhecimento.onnomatch = reconhecimento.onerror;
+    
+    
+    return reconhecimento;
+  }  
+};
+
+const INSTRUCOES_ELS = [
+  '➕🐑 ovelha',
+  '🔃 rola',
+  '↪ volta',
+  '🗑 limpa',
+  '✋ para',
+  '▶ continua'
+].map(i => {
+  let instrucaoEl = document.createElement('span');
+  instrucaoEl.className = 'instrucao';
+  instrucaoEl.innerText = i;
+  return instrucaoEl;
+});
+
+const inicializaInstrucoes = () => {
+  let instrucoesEl = document.createElement('aside');
+  instrucoesEl.id = 'instrucoes';
+  INSTRUCOES_ELS.forEach(el => instrucoesEl.appendChild(el));
+  return instrucoesEl;
+};
+
+const inicializaMicrofone = () => {
+  let botaoMicEl = document.createElement('button');
+  botaoMicEl.id = 'mic';
+  botaoMicEl.className = 'google-microphone';
+  let sombraMicEl = document.createElement('div');
+  sombraMicEl.className = 'shadow';
+  botaoMicEl.appendChild(sombraMicEl);
+  let gnMicEl = document.createElement('div');
+  gnMicEl.className = 'gn';
+  sombraMicEl.appendChild(gnMicEl);
+  let mcMicEl = document.createElement('div');
+  mcMicEl.className = 'mc';
+  gnMicEl.appendChild(mcMicEl);
+  document.body.appendChild(botaoMicEl);
+  
+  let instrucoesEl = inicializaInstrucoes();
+  document.body.appendChild(instrucoesEl);
+  botaoMicEl.addEventListener('mouseover', e => instrucoesEl.classList.add('ativa'));
+  botaoMicEl.addEventListener('mouseleave', e => instrucoesEl.classList.remove('ativa'));
+};
+
+const vibraTela = () => {
+  // chama a vibração da bateria, se houver
+  if ('vibrate' in navigator) {
+    navigator.vibrate(1000);
+  }
+
+  // faz os elementos dentro do tela tremerem
+  document.body.classList.add('vibrando');
+  document.body.addEventListener('animationend', function(e) {
+    e.target.removeEventListener(e.type, arguments.callee);
+    document.body.classList.remove('vibrando');
+  });
+};
+
+
+class Ovelhita {
+  
+  constructor(x = 20, y = 20) {
+    // dimensões da sprite
+    this.largura = 40;
+    this.altura = 40;
+    // coordenadas que definem a posição do centro da ovelha
+    // usamos um sistema de coordenadas que começa no canto direito inferior
+    this.x = x;
+    this.y = y;
+    
+    // estado inicial
+    this.estado = this.y > 20 ? ESTADOS.despencando : ESTADOS.reflexiva;
+    this.tempoNoEstado = 0;
+    this.estadosAnteriores = [];
+    // para que lado está olhando (1 ou -1)
+    this.orientacao = 1;  // olhando para a esquerda
+
+    // horário que o último quadro de atualização foi executado
+    this.tempoAntes = 0;    
+    // quando esta flag é ativada, a ovelha interrompe sua atualização
+    this.deveParar = false;
+    
+    // força alguns alguns métodos a se ligarem a this para que sejam chamados
+    // via callback
+    this.segueMouse = this.segueMouse.bind(this);
+    this.chacoalha = this.chacoalha.bind(this);
+    
+    // inicializa vibração, eventos e a sprite
+    this.inicializa();    
+  }
+  
+  // define qual animação será tocada
+  defineAnimacao(nomeAnimacao) {
+    ANIMACOES.forEach((anim) => this.el.classList.remove(anim));
+    this.el.classList.add(nomeAnimacao);
+  }
+  
+  // define se a ovelha está olhando para esquerda ou direita
+  defineOrientacao(novaOrientacao) {
+    if (novaOrientacao <= 0) {
+      this.el.classList.add('invertido');
+    } else {
+      this.el.classList.remove('invertido');
+    }
+    this.orientacao = novaOrientacao;
+  }
+  
+  // sistema de coordenadas começa na direita e embaixo
+  definePosicao(x, y) {
+    this.x = x;
+    this.el.style.right = `${x - this.largura/2}px`;
+    if (!!y) {
+      this.y = y
+      this.el.style.bottom = `${y - this.altura/2}px`;
+    }
+  }
+  
+  // invocada quando quisermos trocar o estado
+  mudaEstado(novoEstado) {
+    // toca animação de loop do estado
+    let tocarAnimLoop = function(e) {
+      if (!!e) {
+        e.target.removeEventListener(e.type, tocarAnimLoop);
+      }
+      this.defineAnimacao(novoEstado.loop);
+    }.bind(this);
+    
+    let tocarAnimPre = (e) => {
+      if (!!e) {
+        e.target.removeEventListener(e.type, tocarAnimPre);
+      }
+      // pode haver uma animação de entrada do novo estado (de transição)
+      if (typeof novoEstado.pre !== 'undefined') {
+        this.defineAnimacao(novoEstado.pre.anim || novoEstado.pre);
+        
+        let duracaoAnimacaoPre = novoEstado.pre.duracao;
+        if (typeof duracaoAnimacaoPre !== 'undefined') {
+          // a animação prévia de transição deste estado tem uma duração definida
+          setTimeout(() => {
+            tocarAnimLoop();
+          }, duracaoAnimacaoPre);
+        } else {
+          // a animação não é infinita e termina por ela mesma
+          this.el.addEventListener('animationend', tocarAnimLoop);
+        }
+      } else {
+        // não há uma animação de entrada, então vamos executar a animação de loop
+        tocarAnimLoop();
+      }
+    };
+    
+    let tocarAnimPos = () => {
+      // pode haver uma animação de saída do estado atual
+      let animacaoPos = this.estado.pos;
+      if (typeof animacaoPos !== 'undefined') {
+        this.defineAnimacao(animacaoPos.anim || animacaoPos);
+        
+        let duracaoAnimacaoPos = animacaoPos.duracao;
+        if (typeof duracaoAnimacaoPos !== 'undefined') {
+          setTimeout(() => {
+            tocarAnimPre();
+          }, duracaoAnimacaoPos);
+        } else {
+          this.el.addEventListener('animationend', tocarAnimPre);
+        }
+      } else {
+        tocarAnimPre();
+      }
+    };
+  
+    tocarAnimPos();
+    
+    switch (novoEstado) {
+      case ESTADOS.despencando:
+        this.velocidadeY = 0;
+        break;
+    }
+    
+    this.estadosAnteriores.unshift(this.estado);
+    while (this.estadosAnteriores.length > 3) {
+      this.estadosAnteriores.pop();
+    }
+    this.estado = novoEstado;
+    this.tempoNoEstado = 0;
+  }
+  
+  sorteiaProximoEstado() {
+    return ESTADOS[this.estado.proximo[Math.floor(Math.random() * this.estado.proximo.length)]];
+  }
+  
+  bateuNaTela() {
+    return (this.x - this.largura/2 < 0 || this.x + this.largura/2 > window.innerWidth);
+  }
+  
+  saiuDaTela() {
+    return (this.x + this.largura/2 < 0 || this.x - this.largura/2 > window.innerWidth);
+  }
+  
+  revolucionaNaTela() {
+    let newX;
+    if (this.x - this.largura/2 < 0) {
+      newX = this.x + window.innerWidth + this.largura/2;
+    } else if (this.x + this.largura/2 > window.innerWidth) {
+      newX = -this.largura/2;
+    }
+    this.definePosicao(newX);    
+  }
+  
+  passouDoChao() {
+    return (this.y - this.altura/2 < 0);
+  }
+  
+  atualiza(tempo) {
+    let delta = tempo - this.tempoAntes;
+    this.tempoNoEstado += delta;
+    
+    switch (this.estado) {
+      case ESTADOS.reflexiva:
+        if (this.tempoNoEstado > 1000) {
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        break;
+        
+      case ESTADOS.dormindo:
+        if (this.tempoNoEstado > 4000) {
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        break;
+
+      case ESTADOS.andando:
+        this.definePosicao(this.x += this.orientacao * .025 * delta);
+        if (this.tempoNoEstado > 3000) {
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        if (this.saiuDaTela()) {
+          this.revolucionaNaTela();
+        }
+        if (this.bateuNaTela() && this.estadosAnteriores.indexOf(ESTADOS.virando) === -1) {
+          this.mudaEstado(ESTADOS.virando);
+        }
+        break;
+        
+      case ESTADOS.correndo:
+        this.definePosicao(this.x += this.orientacao * .085 * delta);
+        if (this.tempoNoEstado > 2500) {
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        if (this.saiuDaTela()) {
+          // dá a volta na tela
+          this.revolucionaNaTela();
+        }
+        break;
+      
+      case ESTADOS.virando:
+        // 500ms é o mesmo tempo definido na animação em CSS
+        if (this.tempoNoEstado > 500) {
+          this.defineOrientacao(this.orientacao * -1);
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        break;
+        
+      case ESTADOS.rolando:
+        // rola até bater na tela
+        this.definePosicao(this.x += this.orientacao * .085 * delta);
+        if (this.bateuNaTela()) {
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        break;
+      
+      case ESTADOS.despencando:
+        // vai caindo até atingir o chão
+        this.definePosicao(this.x, this.y += this.velocidadeY * .085 * delta);
+        this.velocidadeY -= 0.025;
+        if (this.passouDoChao()) {
+          this.definePosicao(this.x, this.altura/2);
+          vibraTela();
+          this.mudaEstado(this.sorteiaProximoEstado());
+        }
+        break;        
+    }
+    
+    if (!this.deveParar && !this.deveDestruir) {
+      requestAnimationFrame(this.atualiza.bind(this));
+    } else if (this.deveDestruir) {
+      this.destroi();
+    }
+    this.deveParar = false;
+    this.tempoAntes = tempo;
+  }
+  
+  inicializa() {
+    const inicializaSprite = () => {
+      const figureEl = document.createElement('figure');
+      figureEl.classList.add('sprite');
+      figureEl.classList.add('ovelhita');
+      const imgEl = document.createElement('img');
+      imgEl.setAttribute('src', 'ovelhita-spritesheet.png');
+      imgEl.setAttribute('alt', 'Uma ovelha que anda, corre e faz peripécias');
+      imgEl.setAttribute('draggable', 'false');
+      figureEl.appendChild(imgEl);
+      document.body.appendChild(figureEl);
+      this.el = figureEl;
+      this.definePosicao(this.x, this.y);
+    };
+    
+    const inicializaChacoalho = () => {
+      if (typeof window.Shake !== 'undefined') {
+        new Shake().start();
+        window.addEventListener('shake', this.chacoalha, false);
+      }
+    };
+    
+    const inicializaArraste = () => {
+      this.segurando = false;
+      this.arrastando = false;
+      this.el.addEventListener('mousedown', () => {
+        this.segurando = true;
+        this.arrastando = false;
+      });
+      document.addEventListener('mousemove', this.segueMouse);
+      this.el.addEventListener('mouseup', () => {
+          this.segurando = false;
+          if (!this.arrastando){
+            // foi feito um clique na ovelha
+            if (this.estado === ESTADOS.dormindo) {
+              this.mudaEstado(ESTADOS.reflexiva);
+            }
+          } else {
+            // a ovelha estava sendo arrastada e acabou de ser solta
+            this.segurando = false;
+            this.mudaEstado(ESTADOS.despencando);
+          }
+          this.arrastando = false;
+      });
+    };
+    
+    inicializaSprite();
+    inicializaChacoalho();
+    inicializaArraste();
+    
+    // faz a transição para o estado inicial
+    this.mudaEstado(this.estado);
+
+    // dá início ao loop de atualização de lógica
+    requestAnimationFrame(this.atualiza.bind(this));
+  }
+  
+  destroi() {
+    document.removeEventListener('mousemove', this.segueMouse);
+    window.removeEventListener('shake', this.chacoalha);
+    this.el.remove();
+  }
+  
+  chacoalha() {
+    this.mudaEstado(ESTADOS.rolando);
+    vibraTela();
+  }
+  
+  segueMouse(e) {
+    if (this.segurando) {
+      this.arrastando = true;
+      this.definePosicao(
+        window.innerWidth - e.clientX - this.largura/2,
+        window.innerHeight - e.clientY - this.altura/2);
+      this.mudaEstado(ESTADOS.pendurada);
+    }    
+  }
+  
+  para() {
+    this.el.querySelector('img').style.animationPlayState = 'paused';
+    this.deveParar = true;
+  }
+  
+  continua() {
+    this.tempoAntes = performance.now();
+    this.el.querySelector('img').style.animationPlayState = 'running';
+    requestAnimationFrame(this.atualiza.bind(this));
+  }
+  
+  rola() {    
+    this.mudaEstado(ESTADOS.rolando);
+  }
+  
+  volta() {
+    this.mudaEstado(ESTADOS.virando);
+  }
+  
+  limpa() {
+    this.deveParar = true;
+    this.deveDestruir = true;
+  }
+};
+
+class Bando {
+  constructor() {
+    this.ovelhitas = [];
+    inicializaMicrofone();
+    let microfoneEl = document.querySelector('#mic');
+    microfoneEl.addEventListener('click', e => {
+      const animatedEl = microfoneEl.firstElementChild;
+      
+      if (animatedEl.classList.contains('listening')) {
+        this.reconhecimento.stop();
+        document.body.querySelector('#instrucoes').classList.remove('ativa');
+        animatedEl.classList.remove('listening');
+        EFEITOS_SONOROS['cancelou-escuta'].play();
+      } else {
+        document.body.querySelector('#instrucoes').classList.add('ativa');
+        animatedEl.classList.add('listening');
+        EFEITOS_SONOROS['comeca-escutar'].play();
+        this.reconhecimento = inicializaReconhecimentoDeFala({
+          ovelhita: this.nova.bind(this),
+          parar: this.para.bind(this),
+          continuar: this.continua.bind(this),
+          rolar: this.rola.bind(this),
+          voltar: this.volta.bind(this),
+          limpar: this.limpa.bind(this)
+        }, animatedEl);
+      }
+    });
+  }
+  
+  nova() {
+    let x = Math.random() * (window.innerWidth - 40) + 20;
+    let y = Math.random() < .2 ? Math.random() * (window.innerHeight - 40) + 20 : 0;
+    setTimeout(() => {
+      let nova = new Ovelhita(x, y);
+      this.ovelhitas.push(nova);
+      requestAnimationFrame(() => nova.el.classList.add('surgiu'));
+    }, Math.random() * 350);
+  }
+  
+  para() {
+    this.ovelhitas.forEach(o => o.para());
+  }
+
+  continua() {
+    this.ovelhitas.forEach(o => o.continua());
+  }
+  
+  rola() {
+    this.ovelhitas.forEach(o => o.rola());
+    vibraTela();
+  }
+  
+  volta() {
+    this.ovelhitas.forEach(o => o.volta());
+  }
+  
+  limpa() {
+    while(this.ovelhitas.length > 0) {
+      this.ovelhitas.pop().limpa();
+    }
+  }
+}
+
+new Bando().nova();
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Little Cout, o grande (ou não)</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="imagens/ovelhinha.png" type="image/png"
+  </head>
+  <body>
+    <h1><strong>Ovelhas Exóticas</strong></h1>
+    <p>As espécies a seguir são animais extremamente raros, as origens
+      desses animais excêntricos é desconhecida. Cada uma delas tem uma
+      característica única que as dinstinguem das demais, por isso,
+      são um grande alvo de milhonários investidores.</p>
+    <p>A seguir, veja alguns exemplos dessas raças.</p>
+    <h2>Algod-ovelha</h2>
+    <img src="imagens/algod-ovelha.png" class="circular foto-ovelha">
+    <p>Em vez de lã, esta ovelha é uma exímia produtora de 
+      algodão e muito apreciada pela indústria têxtil
+      chinesa.</p>
+    <p>Pessoas pagam milhões para poder criar destas em
+      suas casas.</p>
+    <p>Há boatos que essas ovelhas vêm de um mundo alternativo,
+      lá elas são chamadas de "pokémon", e são capturadas por 
+      um tipo de bolinha aprisionadora, chamada pokébola.
+    <h2>Pul-ovelha</h2>
+    <img src="imagens/pira-tovelha.png" class="circulas foto-ovelha">
+    <p>Uma espécie rara de ovelhas saltadoras por natureza
+      possuem uma incrível capacidade motora e uma 
+      força estrondosa nas patas! 
+      <p><mark>*CUIDADO COM COICES*<mark></p>
+    <h2>Ovelhopixel</h2>
+    <img src="imagens/ovelhopixel.png" class="circular foto-ovelha">
+    <p>Uma ovelha com um formato estranhamente proporcional e cúbico.</p>
+    <p>Ela se alimenta de grama quadrada e possui irmãs de tonalidades distintas.</p>
+    <p><del>SINISTRO<del></p>
+    <h1><strong>Os Biólogos</strong></h1>
+    <p> Esses pesquisadores apaixonados por ovelhas iniciaram suas 
+      descobertas em 2001, com o descobrimento de uma Pul-ovelha. Ela 
+      pulou tão alto que ficou presa em uma nuvem e só caiu de lá 
+      quando choveu. Felizmente ela aterrissou em uma piscina de 
+      bolinhas no quintal do Cout, dizem que ele estava aprendendo 
+      a nadar...
+    <h2>O Cout</h2>
+    <img src="imagens/cout.jpeg" class="circulas foto-ovelha">
+    <p>Um professor da melhor matéria no CEFET-MG. 
+       Subestimado por muitos, compreendido por poucos...</p>
+    <p>Biólogo renomado especializado em ovelhas exóticas 
+      nos fins de semana, adora brincar com a Ovelhopixel.</p>
+    <h2>O HP</h2>
+    <img src="imagens/hp.jpg" class="circular foto-ovelha">
+    <p>André HP, mais conhecido como "HP", é um ex-aluno do Cout,
+      que acabou seguindo a carreira de Biólogo e ajudou o professor
+      a encontrar mais ovelhas malucas.</p>
+    <p> Insta: @andrehparreiras, Discord:https://discord.gg/b6sTe24</p>
+    <h2>E tem mais!</h2>
+    <ul>
+      <li>Robôvelha</li>
+      <li>Ninjo-velha</li>
+      <li>Legovelha</li>
+      <li>Pedreirovelha</li>
+      <li>Guarda-chuvelha</li>
+      <li>Batatovelha</li>
+      <li>Ovelhobola</li>
+      <li>Ovelhoágua</li>
+      <li>Me dá mais pontos pfv Cout</li>
+    </ul>
+    <script src="shake.js></script>
+    <script src-"ovelhita.js></script>
+  </body>
+</html>
